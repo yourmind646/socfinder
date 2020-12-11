@@ -5,6 +5,12 @@ try:
 
 	colorama.init()
 
+	mgnt = Fore.MAGENTA
+	grn = Fore.GREEN
+	rd = Fore.RED
+	ylw = Fore.YELLOW
+	wht = Fore.WHITE
+
 	class nicknameIsEmpty(Exception):
 		pass
 
@@ -12,7 +18,7 @@ try:
 		pass
 
 	def search(nick):
-		print('{}\n[=] Выполняется поиск профилей...{}'.format(Fore.YELLOW, Fore.WHITE))
+		print('{}\n[*] Выполняется поиск профилей...{}'.format(Fore.YELLOW, Fore.WHITE))
 		for site in data:
 			r = requests.get(site + nick)
 			if r.ok:
@@ -20,17 +26,15 @@ try:
 			else:
 				print('{}[-] {}{}'.format(Fore.RED, (site + nick), Fore.WHITE))
 
-	print(Fore.CYAN + '''
-██████████████████████████████████████████████████████████
-█───█────█────█───█───█─██─█────██───█────██─███────████─█
-█─███─██─█─██─█─████─██──█─█─██──█─███─██─█──███─██─███──█
-█───█─██─█─████───██─██─█──█─██──█───█────██─███─██─████─█
-███─█─██─█─██─█─████─██─██─█─██──█─███─█─███─███─██─████─█
-█───█────█────█─███───█─██─█────██───█─█─███─█─█────█─██─█
-██████████████████████████████████████████████████████████
+	print(grn + '''
+   _____                  ______   _               _               
+  / ____|                |  ____| (_)             | |              
+ | (___     ___     ___  | |__     _   _ __     __| |   ___   _ __ 
+  \___ \   / _ \   / __| |  __|   | | | '_ \   / _` |  / _ \ | '__|
+  ____) | | (_) | | (__  | |      | | | | | | | (_| | |  __/ | |   
+ |_____/   \___/   \___| |_|      |_| |_| |_|  \__,_|  \___| |_|   
 
-Предназначено для систем Linux/Termux
-Автор скрипта TG @RubySide\n''' + Fore.WHITE)
+''' + ylw + '[*] Версия - 1.0.2\n[*] Предназначено для систем Linux/Termux\n[*] Автор скрипта TG @RubySide\n' + Fore.WHITE)
 
 	nickname = input('Введите никнейм, по которому нужно найти профиль (пример: rubyside)\n>>> ')
 
@@ -39,7 +43,7 @@ try:
 	elif nickname.find(' ') != -1:
 		raise nicknameContainsSpace()
 
-	print('{}\n[=] Загрузка списка с сайтами...{}'.format(Fore.YELLOW, Fore.WHITE))
+	print('{}\n[*] Загрузка списка с сайтами...{}'.format(Fore.YELLOW, Fore.WHITE))
 	with open("data_file.json", "r") as read_file:
 		data = json.load(read_file)
 	print('{}[+] Список загружен! Сайтов для поиска - {}{}'.format(Fore.GREEN, len(data), Fore.WHITE))
@@ -47,9 +51,9 @@ try:
 	search(nickname)
 
 except EOFError:
-	print('\n{}[=] Выход из программы...{}'.format(Fore.YELLOW, Fore.WHITE))
+	print('\n{}[*] Выход из программы...{}'.format(Fore.YELLOW, Fore.WHITE))
 except KeyboardInterrupt:
-	print('\n\n{}[=] Выход из программы...{}'.format(Fore.YELLOW, Fore.WHITE))
+	print('\n\n{}[*] Выход из программы...{}'.format(Fore.YELLOW, Fore.WHITE))
 except nicknameIsEmpty:
 	print('\n{}[-] Никнейм не введен.{}'.format(Fore.RED, Fore.WHITE))
 except nicknameContainsSpace:
